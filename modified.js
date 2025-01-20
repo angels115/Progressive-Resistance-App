@@ -183,7 +183,10 @@ document.getElementById("importButton").addEventListener("click", () => {
 
 // Modify generateButton event listener to only enable buttons after CSV is loaded, and to hide the buttons after the workout is generated
 generateButton.addEventListener("click", () => {
-  if (Object.keys(referenceData).length === 0) {
+  // Check if the user wants to skip the CSV upload
+  const skipCSV = confirm("Do you want to skip uploading a CSV file and use default weights?");
+  
+  if (!skipCSV && Object.keys(referenceData).length === 0) {
     alert("Please upload the CSV file first.");
     return;
   }
@@ -209,7 +212,6 @@ generateButton.addEventListener("click", () => {
   startSessionTimer();
 
 });
-
 
 
 
