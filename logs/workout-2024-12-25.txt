@@ -1,0 +1,38 @@
+Workout Date: 2024-12-24
+
+Press: Bench Press - 3 sets
+  Set 1: Reps: 5, Weight: 145 lbs
+  Set 2: Reps: 5, Weight: 145 lbs
+  Set 3: Reps: 5, Weight: 145 lbs
+  Rest: 120 seconds
+
+Back: Chin-Ups - 3 sets
+  Set 1: Reps: 3, Weight: 218 lbs
+  Set 2: Reps: 3, Weight: 218 lbs
+  Set 3: Reps: 3, Weight: 218 lbs
+  Rest: 120 seconds
+
+Legs: Deadlifts - 3 sets
+  Set 1: Reps: 7, Weight: 225 lbs
+  Set 2: Reps: 7, Weight: 225 lbs
+  Set 3: Reps: 7, Weight: 225 lbs
+  Rest: 120 seconds
+
+Shoulders: Lateral Raises - 3 sets
+  Set 1: Reps: 20, Weight: 8 lbs
+  Set 2: Reps: 15, Weight: 8 lbs
+  Set 3: Reps: 12, Weight: 8 lbs
+  Rest: 120 seconds
+
+Biceps: Hammer Curls - 3 sets
+  Set 1: Reps: 20, Weight: 20 lbs
+  Set 2: Reps: 20, Weight: 20 lbs
+  Set 3: Reps: 20, Weight: 20 lbs
+  Rest: 60 seconds
+
+Triceps: Bench-Dips - 3 sets
+  Set 1: Reps: 15, Weight: 199 lbs
+  Set 2: Reps: 13, Weight: 199 lbs
+  Set 3: Reps: 12, Weight: 199 lbs
+  Rest: 60 seconds
+

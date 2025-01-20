@@ -1,0 +1,243 @@
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+  background-color: #111;
+  color: #eee;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  align-items: center; /* Center items horizontally */
+}
+
+h1 {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease; /* Smooth transition on hover */
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column; /* Arrange buttons vertically */
+  align-items: center; /* Center buttons horizontally */
+  width: 100%; /* Occupy full width */
+  margin-bottom: 20px; /* Add space below the button group */
+}
+
+#generateButton,
+#reportButton {
+  background-color: #00dd00; /* Volt green */
+  color: #111;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#printButton {
+  background-color: #333; /* Dark gray */
+  color: #00dd00;
+  font-weight: bold;
+}
+
+
+#generateButton:hover,
+#printButton:hover,
+#reportButton:hover,
+.custom-file-upload:hover {
+  opacity: 0.8;
+}
+
+#workoutPlan {
+  margin: 20px auto;
+  border: 2px solid #00dd00; /* Volt green border */
+  padding: 20px;
+  text-align: left;
+  display: inline-block;
+  background-color: #222;
+  border-radius: 10px; /* Slightly rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+#workoutPlan ul {
+  list-style: none;
+  padding: 0;
+}
+
+#workoutPlan li {
+  margin-bottom: 15px;
+}
+
+.set-input-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between; /* Distribute space evenly */
+}
+
+.set-input-item > * {
+  margin-right: 10px; /* Space between elements */
+}
+
+.set-input-item .reps-input,
+.set-input-item .weight-input {
+    margin-right: 10px; /* Add spacing between inputs and timer */
+}
+
+.timer-display {
+    margin-left: auto;
+    font-size: 1.2em;
+    color: #00dd00; /* Volt green */
+    display: flex;
+    align-items: center;
+    position: relative; /* Add this */
+}
+
+.progress-bar-container {
+    width: 100px;
+    height: 15px;
+    background-color: #444; /* Dark gray */
+    border-radius: 8px;
+    overflow: hidden; /* Hide anything that overflows */
+    margin-left: 10px;
+    position: relative; /* Add this */
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #00dd00;
+  width: 0%;
+  position: relative;
+}
+
+.timer-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #111;
+  font-weight: bold;
+  z-index: 1;
+  text-align: center;
+  width: 100%;
+  line-height: 15px;
+  font-size: 0.8em; /* Adjust font size here */
+}
+
+.start-timer-button {
+  padding: 5px 10px;
+  background-color: transparent;
+  color: #00dd00;
+  border: 2px solid #00dd00;
+  cursor: pointer;
+  border-radius: 20px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition on hover */
+}
+
+.start-timer-button:hover {
+  background-color: #00dd00;
+  color: #111;
+}
+
+.weight-input,
+.reps-input {
+  width: 80px;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #00dd00;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #eee;
+  text-align: center;
+}
+
+#sessionTimerDisplay {
+  margin-top: 10px;
+  margin-right: 10px;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #00dd00; /* Volt green */
+}
+
+.session-timer-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Occupy full width */
+  margin-bottom: 20px; /* Add space below the timer group */
+}
+
+.custom-file-upload {
+  display: inline-block;
+  background-color: #00dd00; /* Use the same green as generate workout button */
+  color: #111;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .set-input-item {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .set-input-item > * {
+      margin-right: 0; /* Remove horizontal margin */
+      margin-bottom: 5px; /* Add vertical margin */
+  }
+
+  .set-input-item .reps-input,
+  .set-input-item .weight-input {
+      margin-right: 0; /* Remove horizontal margin */
+  }
+
+  .start-timer-button {
+      margin-left: 0; /* Remove horizontal margin */
+  }
+
+  .timer-display {
+      margin-left: 0; /* Remove horizontal margin */
+  }
+}
+
+
+.change-exercise-button {
+  padding: 5px 10px;
+  background-color: #00dd00; /* Green background */
+  color: #111; /* Black text color for contrast */
+  border: none;
+  cursor: pointer;
+  border-radius: 20px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.change-exercise-button:hover {
+  background-color: #00aa00; /* Darker green on hover */
+}
+
+.exercise-title-container {
+  display: flex;
+  align-items: center; /* Vertically align the title and button */
+  justify-content: space-between; /* Distribute space between them */
+}

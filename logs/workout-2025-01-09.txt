@@ -1,0 +1,38 @@
+Workout Date: 2025-01-09
+
+Press: Dumbbell Incline Press - 3 sets
+  Set 1: Reps: 13, Weight: 50 lbs
+  Set 2: Reps: 11, Weight: 50 lbs
+  Set 3: Reps: 10, Weight: 50 lbs
+  Rest: 120 seconds
+
+Back: Chin-Ups - 3 sets
+  Set 1: Reps: 4, Weight: 224 lbs
+  Set 2: Reps: 3, Weight: 224 lbs
+  Set 3: Reps: 3, Weight: 224 lbs
+  Rest: 120 seconds
+
+Legs: Deadlifts - 3 sets
+  Set 1: Reps: 6, Weight: 265 lbs
+  Set 2: Reps: 4, Weight: 265 lbs
+  Set 3: Reps: 4, Weight: 265 lbs
+  Rest: 120 seconds
+
+Shoulders: Upright Rows - 3 sets
+  Set 1: Reps: 7, Weight: 75 lbs
+  Set 2: Reps: 6, Weight: 75 lbs
+  Set 3: Reps: 6, Weight: 75 lbs
+  Rest: 120 seconds
+
+Biceps: Hammer Curls - 3 sets
+  Set 1: Reps: 15, Weight: 25 lbs
+  Set 2: Reps: 10, Weight: 25 lbs
+  Set 3: Reps: 8, Weight: 25 lbs
+  Rest: 60 seconds
+
+Triceps: Overhead Triceps Extensions - 3 sets
+  Set 1: Reps: 17, Weight: 35 lbs
+  Set 2: Reps: 13, Weight: 35 lbs
+  Set 3: Reps: 10, Weight: 35 lbs
+  Rest: 60 seconds
+

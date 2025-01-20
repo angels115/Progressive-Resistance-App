@@ -1,0 +1,38 @@
+Workout Date: 2024-12-23
+
+Press: Clean and Press - 3 sets
+  Set 1: Reps: 7, Weight: 75 lbs
+  Set 2: Reps: 6, Weight: 75 lbs
+  Set 3: Reps: 6, Weight: 75 lbs
+  Rest: 120 seconds
+
+Back: Dumbbell Rows - 3 sets
+  Set 1: Reps: 12, Weight: 75 lbs
+  Set 2: Reps: 10, Weight: 75 lbs
+  Set 3: Reps: 9, Weight: 75 lbs
+  Rest: 120 seconds
+
+Legs: Squats - 3 sets
+  Set 1: Reps: 11, Weight: 155 lbs
+  Set 2: Reps: 6, Weight: 155 lbs
+  Set 3: Reps: 9, Weight: 135 lbs
+  Rest: 120 seconds
+
+Shoulders: Upright Rows - 3 sets
+  Set 1: Reps: 15, Weight: 55 lbs
+  Set 2: Reps: 14, Weight: 55 lbs
+  Set 3: Reps: 10, Weight: 55 lbs
+  Rest: 120 seconds
+
+Biceps: Dumbbell Curls - 3 sets
+  Set 1: Reps: 12, Weight: 25 lbs
+  Set 2: Reps: 15, Weight: 20 lbs
+  Set 3: Reps: 17, Weight: 15 lbs
+  Rest: 60 seconds
+
+Triceps: Overhead Triceps Extensions - 3 sets
+  Set 1: Reps: 25, Weight: 25 lbs
+  Set 2: Reps: 18, Weight: 25 lbs
+  Set 3: Reps: 15, Weight: 25 lbs
+  Rest: 60 seconds
+

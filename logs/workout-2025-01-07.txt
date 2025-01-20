@@ -1,0 +1,38 @@
+Workout Date: 2025-01-07
+
+Press: One-arm Dumbbell Arnold Press - 3 sets
+  Set 1: Reps: 20, Weight: 25 lbs
+  Set 2: Reps: 15, Weight: 25 lbs
+  Set 3: Reps: 13, Weight: 25 lbs
+  Rest: 120 seconds
+
+Back: Chin-Ups - 3 sets
+  Set 1: Reps: 5, Weight: 219 lbs
+  Set 2: Reps: 3, Weight: 219 lbs
+  Set 3: Reps: 3, Weight: 219 lbs
+  Rest: 120 seconds
+
+Legs: Stiff-Legged Deadlifts - 3 sets
+  Set 1: Reps: 18, Weight: 135 lbs
+  Set 2: Reps: 15, Weight: 135 lbs
+  Set 3: Reps: 10, Weight: 135 lbs
+  Rest: 120 seconds
+
+Shoulders: Upright Rows - 3 sets
+  Set 1: Reps: 18, Weight: 55 lbs
+  Set 2: Reps: 14, Weight: 55 lbs
+  Set 3: Reps: 12, Weight: 55 lbs
+  Rest: 120 seconds
+
+Biceps: Hammer Curls - 3 sets
+  Set 1: Reps: 8, Weight: 29 lbs
+  Set 2: Reps: 6, Weight: 29 lbs
+  Set 3: Reps: 6, Weight: 29 lbs
+  Rest: 60 seconds
+
+Triceps: Bench-Dips - 3 sets
+  Set 1: Reps: 10, Weight: 223 lbs
+  Set 2: Reps: 7, Weight: 223 lbs
+  Set 3: Reps: 7, Weight: 223 lbs
+  Rest: 60 seconds
+

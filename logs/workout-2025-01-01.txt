@@ -1,0 +1,38 @@
+Workout Date: 2025-01-01
+
+Press: Clean and Press - 3 sets
+  Set 1: Reps: 12, Weight: 70 lbs
+  Set 2: Reps: 8, Weight: 70 lbs
+  Set 3: Reps: 7, Weight: 70 lbs
+  Rest: 120 seconds
+
+Back: Chin-Ups - 3 sets
+  Set 1: Reps: 9, Weight: 199 lbs
+  Set 2: Reps: 5, Weight: 199 lbs
+  Set 3: Reps: 5, Weight: 199 lbs
+  Rest: 120 seconds
+
+Legs: Deadlifts - 3 sets
+  Set 1: Reps: 5, Weight: 260 lbs
+  Set 2: Reps: 4, Weight: 260 lbs
+  Set 3: Reps: 3, Weight: 260 lbs
+  Rest: 120 seconds
+
+Shoulders: Lateral Raises - 3 sets
+  Set 1: Reps: 14, Weight: 14 lbs
+  Set 2: Reps: 11, Weight: 14 lbs
+  Set 3: Reps: 10, Weight: 14 lbs
+  Rest: 120 seconds
+
+Biceps: Dumbbell Curls - 3 sets
+  Set 1: Reps: 12, Weight: 29 lbs
+  Set 2: Reps: 10, Weight: 29 lbs
+  Set 3: Reps: 8, Weight: 29 lbs
+  Rest: 60 seconds
+
+Triceps: Bench-Dips - 3 sets
+  Set 1: Reps: 12, Weight: 209 lbs
+  Set 2: Reps: 9, Weight: 209 lbs
+  Set 3: Reps: 8, Weight: 209 lbs
+  Rest: 60 seconds
+

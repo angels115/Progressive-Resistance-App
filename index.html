@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Progressive Resistance Trainer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Progressive Resistance Trainer</h1>
+    
+    <div class="button-group">
+      <button id="generateButton">Generate Workout</button>
+      <button id="printButton" style="display: none;">Print</button>
+      <input type="file" id="csvFileInput" accept=".csv" hidden>
+      <label for="csvFileInput" class="custom-file-upload">Upload Reference Table</label>
+      <button id="importButton">Import Workout</button>
+    </div>
+
+    <div class="session-timer-group">
+      <div id="sessionTimerDisplay"></div>
+    </div>
+
+    <audio id="timerSound">
+      <source src="sounds/beep.mp3" type="audio/mpeg">
+    </audio>
+
+    <dialog id="importDialog">
+      <h3>Import Workout</h3>
+      <textarea id="importCode" placeholder="Paste workout code here"></textarea>
+      <button onclick="importWorkout()">Import</button>
+      <button onclick="this.parentElement.close()">Cancel</button>
+    </dialog>
+  </div>
+  <script src="modified.js"></script>
+</body>
+</html>

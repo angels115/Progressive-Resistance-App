@@ -1,0 +1,13 @@
+name: Lifting-Dashboard
+title: Lifting-Dashboard
+username: hmcwatermelon
+account: hmcwatermelon
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 13665449
+bundleId: 9608158
+url: https://hmcwatermelon.shinyapps.io/Lifting-Dashboard/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: App Notes.docx|index.html|log.analysis.master.R|log.analysis.R|Moving Average of One Rep Max Over Time by Muscle Group.png|reference.table.csv|script.js|sounds/timer.mp3|style.css|logs
