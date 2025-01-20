@@ -197,27 +197,38 @@ button {
 
 /* Media Query for smaller screens */
 @media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .container {
+    padding: 10px; /* Reduce padding on smaller screens */
+  }
+
+  h1 {
+    font-size: 2em; /* Smaller heading size */
+  }
+
+  button {
+    width: 100%; /* Make buttons full width */
+    margin: 10px 0; /* Add vertical margin */
+  }
+
+  .button-group {
+    flex-direction: column; /* Stack buttons vertically */
+  }
+
+  #workoutPlan {
+    width: 100%; /* Make workout plan full width */
+  }
+
   .set-input-item {
-    flex-direction: column; /* Stack items vertically */
+    flex-direction: column; /* Stack inputs vertically */
     align-items: flex-start; /* Align items to the start */
   }
 
-  .set-input-item > * {
-      margin-right: 0; /* Remove horizontal margin */
-      margin-bottom: 5px; /* Add vertical margin */
-  }
-
-  .set-input-item .reps-input,
-  .set-input-item .weight-input {
-      margin-right: 0; /* Remove horizontal margin */
-  }
-
-  .start-timer-button {
-      margin-left: 0; /* Remove horizontal margin */
-  }
-
   .timer-display {
-      margin-left: 0; /* Remove horizontal margin */
+    margin-left: 0; /* Remove left margin */
   }
 }
 
