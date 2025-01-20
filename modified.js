@@ -183,12 +183,14 @@ document.getElementById("importButton").addEventListener("click", () => {
 
 // Modify generateButton event listener to only enable buttons after CSV is loaded, and to hide the buttons after the workout is generated
 generateButton.addEventListener("click", () => {
-  // Check if the user wants to skip the CSV upload
-  const skipCSV = confirm("Do you want to skip uploading a CSV file and use default weights?");
-  
-  if (!skipCSV && Object.keys(referenceData).length === 0) {
-    alert("Please upload the CSV file first.");
-    return;
+  // Check if the user wants to skip the CSV upload only if no CSV has been uploaded
+  if (Object.keys(referenceData).length === 0) {
+    const skipCSV = confirm("Do you want to skip uploading a CSV file and use default weights?");
+    
+    if (!skipCSV) {
+      alert("Please upload the CSV file first.");
+      return;
+    }
   }
   
   const workoutPlan = generateWorkout();
@@ -209,8 +211,8 @@ generateButton.addEventListener("click", () => {
   document.querySelector(".custom-file-upload").style.display = "none"; // Hide the custom label
   document.getElementById("importButton").style.display = "none"; // Hide import button
 
-  startSessionTimer();
 
+  startSessionTimer();
 });
 
 
