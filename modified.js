@@ -311,6 +311,20 @@ function changeExercise(muscleGroup, workoutIndex) {
   const otherExercises = exerciseArray.filter((ex) => ex !== currentExercise);
 
   if (otherExercises.length > 0) {
+    // Capture current user inputs before changing the exercise
+    const exerciseSets = workout[workoutIndex].sets;
+    for (let i = 1; i <= exerciseSets; i++) {
+      const repsInput = document.getElementById(`workout-${workoutIndex}-set-${i}-reps`);
+      const weightInput = document.getElementById(`workout-${workoutIndex}-set-${i}-weight`);
+      if (repsInput) {
+        workout[workoutIndex].actualReps[i - 1] = repsInput.value ? parseInt(repsInput.value) : null;
+      }
+      if (weightInput) {
+        workout[workoutIndex].weights[i - 1] = weightInput.value ? parseInt(weightInput.value) : null;
+      }
+    }
+
+    // Select a new exercise
     const newExercise = otherExercises[Math.floor(Math.random() * otherExercises.length)];
     
     // Get the exercise object for the muscle group
@@ -349,12 +363,7 @@ function changeExercise(muscleGroup, workoutIndex) {
     workout[workoutIndex].reps = newReps;
     workout[workoutIndex].rest = exerciseObj.restTimes[randomRepRangeKey];
     
-    // Clear existing weights and actual reps
-    workout[workoutIndex].weights = [];
-    workout[workoutIndex].actualReps = [];
-    
     // Clear saved inputs for this exercise
-    const exerciseSets = workout[workoutIndex].sets;
     for (let i = 1; i <= exerciseSets; i++) {
       const repsInput = document.getElementById(`workout-${workoutIndex}-set-${i}-reps`);
       const weightInput = document.getElementById(`workout-${workoutIndex}-set-${i}-weight`);
@@ -553,9 +562,24 @@ function displayWorkout(workout) {
       return;
     }
 
+    // Capture the latest user inputs for actual reps and weights
+    workout.forEach((item, workoutIndex) => {
+      for (let i = 1; i <= item.sets; i++) {
+        const repsInput = document.getElementById(`workout-${workoutIndex}-set-${i}-reps`);
+        const weightInput = document.getElementById(`workout-${workoutIndex}-set-${i}-weight`);
+        if (repsInput) {
+          item.actualReps[i - 1] = repsInput.value ? parseInt(repsInput.value) : null;
+        }
+        if (weightInput) {
+          item.weights[i - 1] = weightInput.value ? parseInt(weightInput.value) : null;
+        }
+      }
+    });
+
     // Format workout data and initiate download
     const workoutText = formatWorkoutData(workout);
     const workoutDate = workout[0].date;
+    console.log("Final workout data before download:", workout);
     downloadWorkout(workoutText, workoutDate);
 
     // Stop the session timer
