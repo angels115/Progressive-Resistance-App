@@ -1,8 +1,0 @@
-git init
-git add .
-git commit -m "Updated website styles"
-git remote set-url https://github.com/angels115/Progressive-Resistance-App.git
-git push origin main
-
-
-PAT: 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
