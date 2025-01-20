@@ -767,15 +767,5 @@ function formatWorkoutForText(workout) {
   return workoutText;
 }
 
-function getMuscleEmoji(muscleGroup) {
-  const emojiMap = {
-    'Press': '🏋️',
-    'Back': '💪',
-    'Legs': '🦵',
-    'Shoulders': '🏋️',
-    'Biceps': '💪',
-    'Triceps': '💪'
-  };
-  return emojiMap[muscleGroup] || '🏋️';
-}
+
 
