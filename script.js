@@ -74,7 +74,6 @@ const exercises = {
 
 
 const generateButton = document.getElementById("generateButton");
-const printButton = document.getElementById("printButton");
 const pauseSessionTimerButton = document.getElementById("pauseSessionTimer");
 const sessionTimerDisplay = document.getElementById("sessionTimerDisplay");
 const csvFileInput = document.getElementById("csvFileInput"); // Get the file input element
@@ -137,11 +136,61 @@ csvFileInput.addEventListener("change", () => {
   }
 });
 
+// Modified import function
+function importWorkout() {
+  const importCode = document.getElementById("importCode").value;
+  try {
+    const workoutData = JSON.parse(atob(importCode));
+    
+    // Validate version compatibility
+    if (!workoutData.version || workoutData.version !== "1.0") {
+      throw new Error("Incompatible workout version");
+    }
+    
+    // Initialize workout array
+    workout = workoutData.exercises;
+    
+    // Create the workoutPlanDiv if it doesn't exist
+    let workoutPlanDiv = document.getElementById("workoutPlan");
+    if (!workoutPlanDiv) {
+      workoutPlanDiv = document.createElement("div");
+      workoutPlanDiv.id = "workoutPlan";
+      document.querySelector(".container").appendChild(workoutPlanDiv);
+    }
+    
+    // Hide the initial buttons
+    generateButton.style.display = "none";
+    csvFileInput.style.display = "none";
+    document.querySelector(".custom-file-upload").style.display = "none";
+    document.getElementById("importButton").style.display = "none";
+    
+    // Show workout interface
+    displayWorkout(workout);
+    startSessionTimer();
+    
+    // Close dialog
+    document.getElementById("importDialog").close();
+    
+  } catch (e) {
+    console.error(e); // Add this for debugging
+    alert("Invalid workout code. Please check and try again.");
+  }
+}
+
+document.getElementById("importButton").addEventListener("click", () => {
+  document.getElementById("importDialog").showModal();
+});
+
 // Modify generateButton event listener to only enable buttons after CSV is loaded, and to hide the buttons after the workout is generated
 generateButton.addEventListener("click", () => {
+  // Check if the user wants to skip the CSV upload only if no CSV has been uploaded
   if (Object.keys(referenceData).length === 0) {
-    alert("Please upload the CSV file first.");
-    return;
+    const skipCSV = confirm("Do you want to skip uploading a CSV file and use default weights?");
+    
+    if (!skipCSV) {
+      alert("Please upload the CSV file first.");
+      return;
+    }
   }
   
   const workoutPlan = generateWorkout();
@@ -158,20 +207,12 @@ generateButton.addEventListener("click", () => {
 
   // Hide the buttons
   generateButton.style.display = "none";
-  reportButton.style.display = "none";
   csvFileInput.style.display = "none"; // Hide the file input
   document.querySelector(".custom-file-upload").style.display = "none"; // Hide the custom label
+  document.getElementById("importButton").style.display = "none"; // Hide import button
 
-  // Show the buttons
-  printButton.style.display = "inline-block";
+
   startSessionTimer();
-
-});
-
-
-
-printButton.addEventListener("click", () => {
-  window.print();
 });
 
 
@@ -270,6 +311,20 @@ function changeExercise(muscleGroup, workoutIndex) {
   const otherExercises = exerciseArray.filter((ex) => ex !== currentExercise);
 
   if (otherExercises.length > 0) {
+    // Capture current user inputs before changing the exercise
+    const exerciseSets = workout[workoutIndex].sets;
+    for (let i = 1; i <= exerciseSets; i++) {
+      const repsInput = document.getElementById(`workout-${workoutIndex}-set-${i}-reps`);
+      const weightInput = document.getElementById(`workout-${workoutIndex}-set-${i}-weight`);
+      if (repsInput) {
+        workout[workoutIndex].actualReps[i - 1] = repsInput.value ? parseInt(repsInput.value) : null;
+      }
+      if (weightInput) {
+        workout[workoutIndex].weights[i - 1] = weightInput.value ? parseInt(weightInput.value) : null;
+      }
+    }
+
+    // Select a new exercise
     const newExercise = otherExercises[Math.floor(Math.random() * otherExercises.length)];
     
     // Get the exercise object for the muscle group
@@ -308,12 +363,7 @@ function changeExercise(muscleGroup, workoutIndex) {
     workout[workoutIndex].reps = newReps;
     workout[workoutIndex].rest = exerciseObj.restTimes[randomRepRangeKey];
     
-    // Clear existing weights and actual reps
-    workout[workoutIndex].weights = [];
-    workout[workoutIndex].actualReps = [];
-    
     // Clear saved inputs for this exercise
-    const exerciseSets = workout[workoutIndex].sets;
     for (let i = 1; i <= exerciseSets; i++) {
       const repsInput = document.getElementById(`workout-${workoutIndex}-set-${i}-reps`);
       const weightInput = document.getElementById(`workout-${workoutIndex}-set-${i}-weight`);
@@ -329,7 +379,24 @@ function changeExercise(muscleGroup, workoutIndex) {
 }
 
 function displayWorkout(workout) {
+  if (!workout[0].date) {
+    const today = new Date();
+    const dateString = today.toISOString().split('T')[0];
+    workout.forEach(item => item.date = dateString);
+  }
+  
   const workoutPlanDiv = document.getElementById("workoutPlan");
+  
+  // Create session timer display if it doesn't exist
+  let sessionTimerDisplay = document.getElementById("sessionTimerDisplay");
+  if (!sessionTimerDisplay) {
+    sessionTimerDisplay = document.createElement("div");
+    sessionTimerDisplay.id = "sessionTimerDisplay";
+    document.querySelector(".container").insertBefore(sessionTimerDisplay, workoutPlanDiv);
+  }
+  
+  // Start the session timer
+  startSessionTimer();
   
   // Save existing input values before clearing the display
   const savedInputs = {};
@@ -495,9 +562,24 @@ function displayWorkout(workout) {
       return;
     }
 
+    // Capture the latest user inputs for actual reps and weights
+    workout.forEach((item, workoutIndex) => {
+      for (let i = 1; i <= item.sets; i++) {
+        const repsInput = document.getElementById(`workout-${workoutIndex}-set-${i}-reps`);
+        const weightInput = document.getElementById(`workout-${workoutIndex}-set-${i}-weight`);
+        if (repsInput) {
+          item.actualReps[i - 1] = repsInput.value ? parseInt(repsInput.value) : null;
+        }
+        if (weightInput) {
+          item.weights[i - 1] = weightInput.value ? parseInt(weightInput.value) : null;
+        }
+      }
+    });
+
     // Format workout data and initiate download
     const workoutText = formatWorkoutData(workout);
     const workoutDate = workout[0].date;
+    console.log("Final workout data before download:", workout);
     downloadWorkout(workoutText, workoutDate);
 
     // Stop the session timer
@@ -505,6 +587,38 @@ function displayWorkout(workout) {
   });
 
   workoutPlanDiv.appendChild(finishButton);
+
+  // Add share button next to finish button
+  const shareButton = document.createElement("button");
+  shareButton.textContent = "Share Workout";
+  shareButton.addEventListener("click", () => {
+    const shareableCode = createShareableWorkout(workout);
+    
+    // Create share dialog
+    const dialog = document.createElement("dialog");
+    dialog.innerHTML = `
+      <h3>Share Your Workout</h3>
+      <p>Share this code with others:</p>
+      <input type="text" value="${shareableCode}" readonly />
+      <button onclick="navigator.clipboard.writeText('${shareableCode}')">
+        Copy Code
+      </button>
+      <button onclick="this.parentElement.close()">Close</button>
+    `;
+    document.body.appendChild(dialog);
+    dialog.showModal();
+  });
+  workoutPlanDiv.appendChild(shareButton);
+
+  // Add "Share via Text" button
+  const textShareButton = document.createElement("button");
+  textShareButton.textContent = "Share via Text";
+  textShareButton.addEventListener("click", () => {
+    const textContent = formatWorkoutForText(workout);
+    const encodedText = encodeURIComponent(textContent);
+    window.open(`sms:?&body=${encodedText}`);
+  });
+  workoutPlanDiv.appendChild(textShareButton);
 }
 
 function startTimer(duration, display) {
@@ -591,6 +705,13 @@ function downloadWorkout(workoutText, dateString) {
 function startSessionTimer() {
     if (!sessionTimerRunning) {
         sessionTimerRunning = true;
+        // Get existing timer display
+        const timerDisplay = document.getElementById("sessionTimerDisplay");
+        if (!timerDisplay) {
+            console.error("Timer display element not found");
+            return;
+        }
+        updateSessionTimerDisplay();
         sessionTimerInterval = setInterval(() => {
             sessionTimeElapsed++;
             updateSessionTimerDisplay();
@@ -617,8 +738,58 @@ function pauseSessionTimer() {
 }
 
 function updateSessionTimerDisplay() {
-    sessionTimerDisplay.textContent = `Training Session Time: ${formatTime(
-        sessionTimeElapsed
-    )}`;
+    const timerDisplay = document.getElementById("sessionTimerDisplay");
+    if (!timerDisplay) return;
+    
+    const hours = Math.floor(sessionTimeElapsed / 3600);
+    const minutes = Math.floor((sessionTimeElapsed % 3600) / 60);
+    const seconds = sessionTimeElapsed % 60;
+    
+    timerDisplay.textContent = `Training Session Time: ${hours}h ${minutes}m ${seconds}s`;
 }
+
+function createShareableWorkout(workout) {
+  const shareableData = {
+    date: workout[0].date,
+    exercises: workout.map(item => ({
+      muscleGroup: item.muscleGroup,
+      exercise: item.exercise,
+      sets: item.sets,
+      reps: item.reps,
+      weights: item.weights,
+      rest: item.rest,
+      actualReps: item.actualReps
+    })),
+    totalTime: sessionTimeElapsed,
+    version: "1.0"
+  };
+  
+  return btoa(JSON.stringify(shareableData)); // Base64 encode for sharing
+}
+
+function formatWorkoutForText(workout) {
+  let workoutText = "Today's Workout:\n\n";
+  
+  for (const item of workout) {
+    // Add exercise header
+    workoutText += `${item.exercise}\n`;
+    
+    // Format sets/reps/weight in a compact way
+    for (let i = 0; i < item.sets; i++) {
+      const weight = item.weights[i] || '?';
+      const reps = item.actualReps[i] || item.reps;
+      workoutText += `Set ${i + 1}: ${weight}lbs x ${reps}\n`;
+    }
+    workoutText += '\n';
+  }
+  
+  // Add total workout time
+  const hours = Math.floor(sessionTimeElapsed / 3600);
+  const minutes = Math.floor((sessionTimeElapsed % 3600) / 60);
+  workoutText += `Total time: ${hours}h ${minutes}m`;
+  
+  return workoutText;
+}
+
+
 

@@ -36,10 +36,11 @@ const exercises = {
       "Lunges",
       "Stiff-Legged Deadlifts"
     ],
-    repRanges: ["strength", "hypertrophy"],
+    repRanges: ["strength", "hypertrophy","endurance"],
     restTimes: {
       strength: 120,
-      hypertrophy: 120
+      hypertrophy: 120,
+      endurance: 120,
     },
     sets: 3
   },
@@ -235,7 +236,6 @@ function generateWorkout() {
   // Define exercises with restricted rep ranges
   const strengthHypertrophyExercises = [
     "Deadlifts",
-    "Squats",
     "Chin-Ups",
     "Clean and Press",
   ];
@@ -332,7 +332,7 @@ function changeExercise(muscleGroup, workoutIndex) {
     
     // Determine valid rep ranges for the new exercise
     let validRepRanges;
-    const strengthHypertrophyExercises = ["Deadlifts", "Squats", "Chin-Ups", "Clean and Press"];
+    const strengthHypertrophyExercises = ["Deadlifts", "Chin-Ups", "Clean and Press"];
     const hypertrophyEnduranceExercises = [
       "Dumbbell Rows", "Dumbbell Incline Press", "Stiff-Legged Deadlifts",
       "Lunges", "One-arm Dumbbell Arnold Press", "Barbell Curls", "Dumbbell Curls",

@@ -1,0 +1,39 @@
+Workout Date: 2025-01-20
+
+Press: Bench Press - 4 sets
+  Set 1: Reps: 4, Weight: 150 lbs
+  Set 2: Reps: 7, Weight: 135 lbs
+  Set 3: Reps: 4, Weight: 135 lbs
+  Set 4: Reps: 4, Weight: 135 lbs
+  Rest: 120 seconds
+
+Back: Dumbbell Rows - 3 sets
+  Set 1: Reps: 20, Weight: 64 lbs
+  Set 2: Reps: 15, Weight: 64 lbs
+  Set 3: Reps: 12, Weight: 64 lbs
+  Rest: 120 seconds
+
+Legs: Squats - 3 sets
+  Set 1: Reps: 7, Weight: 180 lbs
+  Set 2: Reps: 4, Weight: 180 lbs
+  Set 3: Reps: 3, Weight: 180 lbs
+  Rest: 120 seconds
+
+Shoulders: Lateral Raises - 3 sets
+  Set 1: Reps: 15, Weight: 14 lbs
+  Set 2: Reps: 10, Weight: 14 lbs
+  Set 3: Reps: 9, Weight: 14 lbs
+  Rest: 60 seconds
+
+Biceps: Hammer Curls - 3 sets
+  Set 1: Reps: 20, Weight: 25 lbs
+  Set 2: Reps: 10, Weight: 25 lbs
+  Set 3: Reps: 8, Weight: 25 lbs
+  Rest: 60 seconds
+
+Triceps: Bench-Dips - 3 sets
+  Set 1: Reps: 17, Weight: 199 lbs
+  Set 2: Reps: 9, Weight: 199 lbs
+  Set 3: Reps: 7, Weight: 199 lbs
+  Rest: 60 seconds
+
