@@ -72,6 +72,8 @@ const exercises = {
   }
 };
 
+const repRangeProgression = ['endurance', 'hypertrophy', 'strength'];
+
 
 const generateButton = document.getElementById("generateButton");
 const pauseSessionTimerButton = document.getElementById("pauseSessionTimer");
@@ -88,6 +90,36 @@ let referenceData = {}; // Initialize an empty object for referenceData
 
 // Declare workout outside any function
 let workout = [];
+
+// Mesocycle state variables
+let mesocycleStartDate;
+let currentRepRangeIndex;
+
+// Function to initialize and manage mesocycle state
+function initializeMesocycleState() {
+  mesocycleStartDate = localStorage.getItem('mesocycleStartDate');
+  currentRepRangeIndex = localStorage.getItem('currentRepRangeIndex');
+
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
+
+  if (!mesocycleStartDate) {
+    console.log('No mesocycleStartDate found. Initializing new mesocycle.');
+    mesocycleStartDate = today;
+    currentRepRangeIndex = 0;
+    localStorage.setItem('mesocycleStartDate', mesocycleStartDate);
+    localStorage.setItem('currentRepRangeIndex', currentRepRangeIndex.toString());
+  } else {
+    // mesocycleStartDate exists, check currentRepRangeIndex
+    if (currentRepRangeIndex === null || isNaN(parseInt(currentRepRangeIndex))) {
+      console.log('currentRepRangeIndex not found or invalid. Resetting to 0.');
+      currentRepRangeIndex = 0;
+      localStorage.setItem('currentRepRangeIndex', currentRepRangeIndex.toString());
+    } else {
+      currentRepRangeIndex = parseInt(currentRepRangeIndex);
+      console.log('Mesocycle state loaded:', { mesocycleStartDate, currentRepRangeIndex });
+    }
+  }
+}
 
 // Function to parse the CSV data and populate referenceData
 function parseCSVData(csvData) {
@@ -221,9 +253,35 @@ function generateWorkout() {
 
   workout = []; // Re-initialize workout inside generateWorkout
 
-  // Get the current date in landlab-MM-DD format
-  const today = new Date();
-  const dateString = today.toISOString().slice(0, 10); // Format as landlab-MM-DD
+  // Retrieve Mesocycle State (global variables updated by initializeMesocycleState)
+  // currentRepRangeIndex is already an integer due to initializeMesocycleState
+
+  // Calculate Weeks Passed
+  const currentDate = new Date();
+  const startDate = new Date(mesocycleStartDate);
+  const differenceInMs = currentDate - startDate;
+  const weeksPassed = Math.floor(differenceInMs / (1000 * 60 * 60 * 24 * 7));
+
+  // Implement Rep Range Selection Logic
+  let selectedRepRangeKey;
+
+  if (weeksPassed < 4) {
+    selectedRepRangeKey = repRangeProgression[currentRepRangeIndex];
+  } else {
+    currentRepRangeIndex++;
+    if (currentRepRangeIndex >= repRangeProgression.length) {
+      currentRepRangeIndex = 0; // Cycle back
+    }
+    mesocycleStartDate = currentDate.toISOString().slice(0, 10);
+    localStorage.setItem('currentRepRangeIndex', currentRepRangeIndex.toString());
+    localStorage.setItem('mesocycleStartDate', mesocycleStartDate);
+    selectedRepRangeKey = repRangeProgression[currentRepRangeIndex];
+    console.log('Mesocycle advanced. New start date:', mesocycleStartDate, 'New rep range index:', currentRepRangeIndex);
+  }
+  console.log('Selected rep range key for this workout:', selectedRepRangeKey);
+
+  // Get the current date in YYYY-MM-DD format for the workout items
+  const dateString = currentDate.toISOString().slice(0, 10);
 
   // Define rep ranges
   const repRanges = {
@@ -270,19 +328,23 @@ function generateWorkout() {
         validRepRanges = exerciseObj.repRanges;
       }
 
-      // Choose a random rep range from the valid rep ranges for the exercise
-      const randomRepRangeKey =
-        validRepRanges[Math.floor(Math.random() * validRepRanges.length)];
-      const [minReps, maxReps] = repRanges[randomRepRangeKey];
-
-      // Randomly choose a rep number within the range
+      // Determine finalRepRangeKey based on mesocycle's selectedRepRangeKey and exercise's validRepRanges
+      let finalRepRangeKey;
+      if (validRepRanges.includes(selectedRepRangeKey)) {
+        finalRepRangeKey = selectedRepRangeKey;
+      } else {
+        finalRepRangeKey = validRepRanges[0]; // Default to the first valid rep range for the exercise
+        console.warn(`Mesocycle's selected rep range '${selectedRepRangeKey}' is not valid for exercise '${exercise}'. Defaulting to '${finalRepRangeKey}'.`);
+      }
+      
+      const [minReps, maxReps] = repRanges[finalRepRangeKey];
       const reps = getRandomInt(minReps, maxReps);
 
       workout.push({
         date: dateString, // Add the date to each exercise
         muscleGroup,
         exercise,
-        rest: exerciseObj.restTimes[randomRepRangeKey], // Use the rest time based on the selected rep range
+        rest: exerciseObj.restTimes[finalRepRangeKey], 
         sets: exerciseObj.sets, // Use the defined sets for this muscle group
         reps: reps,
       });
@@ -791,5 +853,5 @@ function formatWorkoutForText(workout) {
   return workoutText;
 }
 
-
+initializeMesocycleState();
 
