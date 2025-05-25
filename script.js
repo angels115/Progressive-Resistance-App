@@ -94,6 +94,14 @@ let workout = [];
 // Mesocycle state variables
 let mesocycleStartDate;
 let currentRepRangeIndex;
+let selectedRepRangeKey; // To be set by generateWorkout and used by changeExercise
+
+// Define rep ranges globally
+const repRanges = {
+  strength: [3, 5], // 3-5 reps for strength
+  hypertrophy: [6, 12], // 6-12 reps for muscle growth
+  endurance: [15, 20], // 15-20 reps for muscular endurance
+};
 
 // Function to initialize and manage mesocycle state
 function initializeMesocycleState() {
@@ -263,7 +271,7 @@ function generateWorkout() {
   const weeksPassed = Math.floor(differenceInMs / (1000 * 60 * 60 * 24 * 7));
 
   // Implement Rep Range Selection Logic
-  let selectedRepRangeKey;
+  // Note: selectedRepRangeKey is now global
 
   if (weeksPassed < 4) {
     selectedRepRangeKey = repRangeProgression[currentRepRangeIndex];
@@ -283,13 +291,7 @@ function generateWorkout() {
   // Get the current date in YYYY-MM-DD format for the workout items
   const dateString = currentDate.toISOString().slice(0, 10);
 
-  // Define rep ranges
-  const repRanges = {
-    strength: [3, 5], // 3-5 reps for strength
-    hypertrophy: [6, 12], // 6-12 reps for muscle growth
-    endurance: [15, 20], // 15-20 reps for muscular endurance
-  };
-
+  // repRanges is now global
   // Define exercises with restricted rep ranges
   const strengthHypertrophyExercises = [
     "Deadlifts",
@@ -409,21 +411,24 @@ function changeExercise(muscleGroup, workoutIndex) {
       validRepRanges = exerciseObj.repRanges;
     }
 
-    // Choose a random rep range and get rep count
-    const repRanges = {
-      strength: [3, 5],
-      hypertrophy: [6, 12],
-      endurance: [15, 20]
-    };
+    // repRanges is now global, selectedRepRangeKey is global (set by generateWorkout)
     
-    const randomRepRangeKey = validRepRanges[Math.floor(Math.random() * validRepRanges.length)];
-    const [minReps, maxReps] = repRanges[randomRepRangeKey];
+    // Determine finalRepRangeKey using Mesocycle's selectedRepRangeKey
+    let finalRepRangeKey;
+    if (validRepRanges.includes(selectedRepRangeKey)) {
+      finalRepRangeKey = selectedRepRangeKey;
+    } else {
+      finalRepRangeKey = validRepRanges[0]; // Default to first valid
+      console.warn(`Mesocycle's selected rep range '${selectedRepRangeKey}' for the current workout is not valid for newly selected exercise '${newExercise}'. Defaulting to '${finalRepRangeKey}'.`);
+    }
+
+    const [minReps, maxReps] = repRanges[finalRepRangeKey]; // Use global repRanges
     const newReps = getRandomInt(minReps, maxReps);
 
     // Update the workout array with the new exercise and reps
     workout[workoutIndex].exercise = newExercise;
     workout[workoutIndex].reps = newReps;
-    workout[workoutIndex].rest = exerciseObj.restTimes[randomRepRangeKey];
+    workout[workoutIndex].rest = exerciseObj.restTimes[finalRepRangeKey]; // Ensure this uses finalRepRangeKey
     
     // Clear saved inputs for this exercise
     for (let i = 1; i <= exerciseSets; i++) {
